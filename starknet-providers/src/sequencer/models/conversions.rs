@@ -111,19 +111,6 @@ impl TryFrom<Block> for core::MaybePendingBlockWithTxs {
                     new_root: state_root,
                     timestamp: value.timestamp,
                     sequencer_address: value.sequencer_address.unwrap_or_default(),
-                    l1_gas_price: core::ResourcePrice {
-                        price_in_strk: Some(
-                            value
-                                .strk_l1_gas_price
-                                .try_into()
-                                .map_err(|_| ConversionError)?,
-                        ),
-                        price_in_wei: value
-                            .eth_l1_gas_price
-                            .try_into()
-                            .map_err(|_| ConversionError)?,
-                    },
-                    starknet_version: value.starknet_version.ok_or(ConversionError)?,
                     transactions: value
                         .transactions
                         .into_iter()

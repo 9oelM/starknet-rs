@@ -129,9 +129,9 @@ pub struct BlockWithTxs {
     #[serde_as(as = "UfeHex")]
     pub sequencer_address: FieldElement,
     /// The price of L1 gas in the block
-    pub l1_gas_price: ResourcePrice,
+    // pub l1_gas_price: ResourcePrice,
     /// Semver of the current Starknet protocol
-    pub starknet_version: String,
+    // pub starknet_version: String,
     /// The transactions in this block
     pub transactions: Vec<Transaction>,
 }
