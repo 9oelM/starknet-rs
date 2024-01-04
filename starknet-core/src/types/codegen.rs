@@ -736,6 +736,15 @@ pub enum FunctionStateMutability {
 /// Invoke transaction receipt.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct InvokeTransactionReceipt {
+    // "transaction_hash": {
+    // "actual_fee": {
+    // "execution_status": {
+    // "finality_status": {
+    // "block_hash": {
+    // "block_number": {
+    // "messages_sent": {
+    // "revert_reason": {
+    // "events": {
     /// The hash identifying the transaction
     pub transaction_hash: FieldElement,
     /// The fee that was charged by the sequencer
@@ -751,9 +760,9 @@ pub struct InvokeTransactionReceipt {
     /// The events emitted as part of this transaction
     pub events: Vec<Event>,
     /// The resources consumed by the transaction
-    pub execution_resources: ExecutionResources,
+    // pub execution_resources: ExecutionResources,
     /// Transaction execution result
-    pub execution_result: ExecutionResult,
+    pub execution_status: ExecutionResult,
 }
 
 /// The execution trace of an invoke transaction.
@@ -3101,7 +3110,7 @@ impl Serialize for InvokeTransactionReceipt {
             pub block_number: &'a u64,
             pub messages_sent: &'a [MsgToL1],
             pub events: &'a [Event],
-            pub execution_resources: &'a ExecutionResources,
+            // pub execution_resources: &'a ExecutionResources,
             #[serde(flatten)]
             pub execution_result: &'a ExecutionResult,
         }
@@ -3117,8 +3126,8 @@ impl Serialize for InvokeTransactionReceipt {
             block_number: &self.block_number,
             messages_sent: &self.messages_sent,
             events: &self.events,
-            execution_resources: &self.execution_resources,
-            execution_result: &self.execution_result,
+            // execution_resources: &self.execution_resources,
+            execution_result: &self.execution_status,
         };
 
         Tagged::serialize(&tagged, serializer)
@@ -3163,8 +3172,8 @@ impl<'de> Deserialize<'de> for InvokeTransactionReceipt {
             block_number: tagged.block_number,
             messages_sent: tagged.messages_sent,
             events: tagged.events,
-            execution_resources: tagged.execution_resources,
-            execution_result: tagged.execution_result,
+            // execution_resources: tagged.execution_resources,
+            execution_status: tagged.execution_result,
         })
     }
 }

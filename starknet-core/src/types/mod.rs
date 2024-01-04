@@ -416,7 +416,7 @@ impl TransactionReceipt {
 
     pub fn execution_result(&self) -> &ExecutionResult {
         match self {
-            TransactionReceipt::Invoke(receipt) => &receipt.execution_result,
+            TransactionReceipt::Invoke(receipt) => &receipt.execution_status,
             TransactionReceipt::L1Handler(receipt) => &receipt.execution_result,
             TransactionReceipt::Declare(receipt) => &receipt.execution_result,
             TransactionReceipt::Deploy(receipt) => &receipt.execution_result,
